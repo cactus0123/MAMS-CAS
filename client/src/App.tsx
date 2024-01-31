@@ -1,10 +1,27 @@
 import React from "react";
 import CourseTable from "./Components/CourseTable.jsx";
 import "./App.css";
-import { Button, Alert, Nav } from "react-bootstrap";
+import { Button, Alert, Nav, Table } from "react-bootstrap";
+import Select from "react-select";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+interface Course {
+  CID: string;
+  TITLE: string;
+}
+
 function App() {
+  let input = require("./Components/Courses_v1.json");
+
+  const [selectedCourse, setSelectedCourse] = React.useState<Course[]>([]);
+
+  let options = input.map((courses: Course) => {
+    return {
+      value: courses.CID,
+      label: courses.CID,
+    };
+  });
+
   return (
     <div className="App">
       <div className="head">
@@ -39,7 +56,7 @@ function App() {
                 <li className="breadcrumb-item active">Test 3</li>
               </ol>
             </nav>
-            <Alert variant="danger">This is an alert</Alert>
+            <Alert variant="primary">Welcome to MAMAS CAS!</Alert>
             <Button>This is a bootstrap button</Button>
           </div>
         </div>
@@ -47,8 +64,18 @@ function App() {
 
       <div className="card courses-card">
         <h2 className="card-title">Available Courses</h2>
-        <CourseTable />
+        {/* <CourseTable /> */}
+        <Select
+          options={options}
+          onChange={(selectedOption) => {
+            console.log(selectedOption);
+          }}
+        ></Select>
       </div>
+
+      <Table striped bordered hover>
+        <tbody></tbody>
+      </Table>
     </div>
   );
 }
