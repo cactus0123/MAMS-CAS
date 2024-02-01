@@ -14,6 +14,9 @@
 
 /* End of temp stuff*/
 
+body {
+  background-color: rgb(237, 237, 237) !important;
+}
 
 .App {
   text-align: center;
@@ -26,11 +29,9 @@
   background-color: var(--mams-red);
 }
 
-.courses-card{
-  text-align: left;
-  max-width: 95%;
-  margin: auto;
-}
 
 /* Top Menu/Nav Styling */
 @import './Styling/TopMenu.css';
+
+/* Course Select Card Styling*/
+@import './Styling/SelectCourse.css';

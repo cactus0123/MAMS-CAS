@@ -1,0 +1,36 @@
+/* Root Variables */
+@import './Constants.css';
+
+.courses-card {
+  background-color: white;
+  text-align: left;
+  max-width: 95%;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.toggle-search {
+  font-size: 0.9rem;
+  padding: 3px 5px;
+  border: 0 !important;
+}
+
+.custom-course-form {
+  padding-left: 10px;
+}
+.custom-course-entry {
+  width: 30%;
+}
+
+/* 
+div[role$="listbox"] {
+  position: absolute !important;
+  top: 100px;
+} */
+
+div[role$="listbox"] div[role$="option"]:not([class$=" css-tr4s17-option"]){
+  background-color: #FFFFFF;
+}
+div[role$="listbox"] div[role$="option"]:not([class$=" css-tr4s17-option"]):hover{
+  background-color: #DEEBFF;
+}
