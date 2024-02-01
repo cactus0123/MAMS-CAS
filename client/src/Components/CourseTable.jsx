@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 
 
-function MyComponent() {
+function CourseTable() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -60,4 +60,4 @@ function MyComponent() {
   );
 }
 
-export default MyComponent;
+export default CourseTable;
