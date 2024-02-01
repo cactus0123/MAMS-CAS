@@ -1,8 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
+
+/* Root variables */
 :root {
-  --mams-red: #7d2029
+  --mams-red: #7d2029;
+  --top-menu-size: 153px;
 }
+
+/* Temp stuff */
+
+.temp-cont {
+  top: var(--top-menu-size);
+  position: absolute;
+}
+
+/* End of temp stuff*/
 
 
 .App {
@@ -125,3 +137,5 @@
   width: 100%;
   border-bottom: 5px solid var(--mams-red);
 }
+
+/* End of top nav stuff :( */
