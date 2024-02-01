@@ -8,13 +8,15 @@ import { Button, Alert, Nav, Table } from "react-bootstrap";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-/* Custom Component Imports */
+/* Custom Component and Container Imports */
 import CourseTable from "./Components/CourseTable";
 import TopMenu from "./Components/TopMenu";
-import SelectCourseWrapper from "./Containers/SelectCourseWrapper"
-import CourseSelectAndTablesWrapper from "./Containers/CourseSelectAndTablesWrapper";
+import SelectCourseAndTablesWrapper from "./Containers/SelectCourseAndTablesWrapper";
 
 // import Column from "antd/es/table/Column.js";
+
+
+
 
 
 function App() {
@@ -29,7 +31,7 @@ function App() {
         <Col>
           <div className="App">
 
-            <CourseSelectAndTablesWrapper />
+            <SelectCourseAndTablesWrapper />
 
           </div>
         </Col>

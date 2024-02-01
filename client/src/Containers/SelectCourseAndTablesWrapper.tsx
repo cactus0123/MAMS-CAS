@@ -5,14 +5,20 @@ import { useState } from "react";
 import SelectCourseWrapper from "./SelectCourseWrapper";
 import SelectedCourseTables from "../Components/SelectedCourseTables";
 
-function CourseSelectAndTablesWrapper() {
-  
-  const [selectedCourses, setSelectedCourses] = useState<string[]>([]);
 
-  const selectedCoursesElems = selectedCourses.map((cid: string) => {
+interface Option {
+  value: string;
+  label: string;
+}
+
+function SelectCourseAndTablesWrapper() {
+  
+  const [selectedCourses, setSelectedCourses] = useState<Option[]>([]);
+
+  const selectedCoursesElems = selectedCourses.map((cid: Option) => {
     return (
-      <tr key={cid}>
-        <td>{cid}</td>
+      <tr key={cid.value}>
+        <td>{cid.value}</td>
       </tr>
     );
   })
@@ -25,4 +31,4 @@ function CourseSelectAndTablesWrapper() {
   )
 }
 
-export default CourseSelectAndTablesWrapper;
+export default SelectCourseAndTablesWrapper;

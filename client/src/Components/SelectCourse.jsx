@@ -1,19 +1,34 @@
 import React from "react";
+
 import Select from "react-select";
+import { Card } from 'react-bootstrap';
+
+import EnterCourseMenuWrapper from "../Containers/EnterCourseMenuWrapper.tsx";
 
 
-function SelectCourse({ options, onChange }) {
+function SelectCourse({ value, options, onChange, onSubmitCustom }) {
 
   return (
     <>
-    <div className="card courses-card">
-      <h2 className="card-title">Available Courses</h2>
-      {/* <CourseTable /> */}
-      <Select
-        options={options}
-        onChange={onChange}
-      />
-    </div>
+    <Card className="courses-card">
+      <Card.Body>
+        <Card.Title>Select Courses</Card.Title>
+        {/* <CourseTable /> */}
+
+        <Select
+          value={value}
+          options={options}
+          onChange={onChange}
+          placeholder={"Search"}
+          isMulti
+          closeMenuOnSelect={false}
+          hideSelectedOptions={false}
+          
+        />
+        
+        <EnterCourseMenuWrapper onSubmitCustom={onSubmitCustom}/>
+      </Card.Body>
+    </Card>
     </>
   )
 }

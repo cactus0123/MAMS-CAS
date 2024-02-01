@@ -1,6 +1,8 @@
 import React from "react";
 
+import { useState } from "react";
 import SelectCourse from "../Components/SelectCourse";
+import { Form } from "react-bootstrap";
 
 
 interface Course {
@@ -8,7 +10,13 @@ interface Course {
   TITLE: string;
 }
 
-type courseSelecterSetter = (input: string[]) => void;
+interface Option {
+  value: string;
+  label: string;
+}
+
+type prevFunc = (input: any) => Option[];
+type courseSelecterSetter = ((input: Option[] | prevFunc) => void)
 
 /**
  * Gets data from courses in Courses_v1.json
@@ -27,23 +35,45 @@ function getCourseOptions(): {value: string, label: string}[] {
   return options;
 }
 
-function SelectCourseWrapper( {selectedCourses, setSelectedCourses}:{selectedCourses:string[], setSelectedCourses:courseSelecterSetter}) {
-
+function SelectCourseWrapper( {selectedCourses, setSelectedCourses}:{selectedCourses:Option[], setSelectedCourses:courseSelecterSetter}) {
+  const [currentlySelected, setCurrentlySelected] = useState<string[]>();
   
   const options = getCourseOptions();
 
 
   const changeHandler = (
-    selectedOption: { value: string; label: string } | null
+    selectedOptions: Option[] | null
   ) => {
-    if (selectedOption != null) {
-      console.log(selectedOption.value);
-      setSelectedCourses([...selectedCourses, selectedOption.value]);
-    }
+      if(selectedOptions != null) {
+        setSelectedCourses(selectedOptions as Option[]);
+      }
+    // if (selectedOption != null) {
+    //   console.log(selectedOption.value);
+    //   setSelectedCourses([...selectedCourses, selectedOption.value]);
+    // }
+
   }
 
+  const submitCustomHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    
+    const customCourseID = (event.currentTarget.elements.namedItem('course') as HTMLInputElement)?.value;
+
+    console.log(customCourseID);
+    
+    const customCourseOption: Option = {
+      value: customCourseID,
+      label: customCourseID
+    }
+    setSelectedCourses(((prev: Option[]) => [...prev, customCourseOption] as Option[]));
+
+    form.reset();
+  };
+
   return (
-    <SelectCourse options={options} onChange={changeHandler} />
+    <SelectCourse value={selectedCourses} options={options} onChange={changeHandler} onSubmitCustom={submitCustomHandler}/>
   )
 }
 
