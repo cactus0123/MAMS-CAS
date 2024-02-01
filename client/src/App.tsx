@@ -1,6 +1,8 @@
 import React from "react";
 import CourseTable from "./Components/CourseTable.jsx";
+import TopMenu from "./Components/TopMenu.jsx";
 import "./App.css";
+import { Container, Row, Col } from "react-bootstrap";
 import { Button, Alert, Nav, Table } from "react-bootstrap";
 import Select from "react-select";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -23,6 +25,11 @@ function App() {
   });
 
   return (
+    <>
+    {/* menu is this thing here*/}
+    <TopMenu />
+
+
     <div className="App">
       <div className="head">
         <ul className="nav justify-content-center mams-red">
@@ -97,7 +104,9 @@ function App() {
         </tbody>
       </Table>
     </div>
+    </>
   );
 }
 
 export default App;
+
