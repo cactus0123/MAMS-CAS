@@ -1,0 +1,102 @@
+
+.be-short {
+  height: 110px;
+}
+
+.logo {
+  margin-top: 72px;
+
+}
+.logo-wrapper {
+  margin-left: 14%;
+}
+
+
+.nav-title {
+  font-family: 'Baskerville', serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+  font-style: italic;
+}
+
+.login-button {
+  margin-right: 35px;
+  padding: 5px 20px !important; 
+  border-radius: 20px !important;
+  text-decoration: none !important;
+
+  --darker-mams-red: #721922;
+  background-color: var(--darker-mams-red) !important;
+  
+}
+
+.login-text {
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: white;
+  margin-right: 6px;
+}
+.login-text, .login-icon {
+  filter: brightness(0.85);
+}
+.login-button:hover {
+  --darkest-mams-red: #67141c;
+  background-color: var(--darkest-mams-red) !important;
+}
+.login-button:hover .login-text{
+  text-decoration: underline;
+}
+.login-button:hover .login-text, .login-button:hover .login-icon {
+  filter: brightness(1);
+}
+
+.top-nav {
+  z-index: 10;
+  height: 110px;
+  box-shadow: 0 0 20px rgba(0,0,0,.9);
+}
+
+.bottom-nav {
+  background-color: white;
+  height: 43px;
+  box-shadow: 0 0 10px rgba(0,0,0,.6);
+  padding-right: max(8%, 80px) !important;
+}
+
+.bottom-nav ul {
+  width: 60% !important;
+}
+.bottom-nav ul li {
+  width: 50% !important;
+  z-index: 5;
+  box-sizing: border-box;
+  position: relative;
+  height: 44px;
+}
+.bottom-nav ul li a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.bottom-nav ul li:hover {
+  background-color: var(--mams-red);
+  z-index: 15;
+}
+.bottom-nav ul li:hover a {
+  color: white !important;
+  transition: color 0s;
+}
+
+.bottom-nav ul li:has(a.active)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-bottom: 5px solid var(--mams-red);
+}
