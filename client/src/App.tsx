@@ -13,7 +13,7 @@ interface Course {
 function App() {
   let input = require("./Components/Courses_v1.json");
 
-  const [selectedCourse, setSelectedCourse] = React.useState<Course[]>([]);
+  const [selectedCourses, setSelectedCourses] = React.useState<string[]>([]);
 
   let options = input.map((courses: Course) => {
     return {
@@ -67,14 +67,32 @@ function App() {
         {/* <CourseTable /> */}
         <Select
           options={options}
-          onChange={(selectedOption) => {
-            console.log(selectedOption);
+          onChange={(
+            selectedOption: { value: string; label: string } | null
+          ) => {
+            if (selectedOption != null) {
+              console.log(selectedOption.value);
+              setSelectedCourses([...selectedCourses, selectedOption.value]);
+            }
           }}
         ></Select>
       </div>
 
       <Table striped bordered hover>
-        <tbody></tbody>
+        <thead>
+          <tr>
+            <th>Course ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          {selectedCourses.map((cid: string) => {
+            return (
+              <tr key={cid}>
+                <td>{cid}</td>
+              </tr>
+            );
+          })}
+        </tbody>
       </Table>
     </div>
   );
