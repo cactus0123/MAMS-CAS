@@ -18,7 +18,7 @@ function App() {
   let options = input.map((courses: Course) => {
     return {
       value: courses.CID,
-      label: courses.CID,
+      label: courses.TITLE,
     };
   });
 
@@ -86,9 +86,11 @@ function App() {
         </thead>
         <tbody>
           {selectedCourses.map((cid: string) => {
+            const course = input.find((c: Course) => c.CID === cid);
             return (
               <tr key={cid}>
                 <td>{cid}</td>
+                <td></td>
               </tr>
             );
           })}
