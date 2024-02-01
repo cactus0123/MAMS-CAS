@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* Root variables */
 :root {
   --mams-red: #7d2029;
   --top-menu-size: 153px;
+  --noto-sans: "Noto Sans";
 }
