@@ -26,7 +26,10 @@ function App() {
 
   return (
     <>
+    {/* menu is this thing here*/}
     <TopMenu />
+
+
     <div className="App">
       <div className="head">
         <ul className="nav justify-content-center mams-red">
