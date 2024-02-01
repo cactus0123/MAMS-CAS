@@ -31,22 +31,6 @@ function App() {
 
             <CourseSelectAndTablesWrapper />
 
-            {/* <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>Course ID</th>
-                </tr>
-              </thead>
-              <tbody>
-                {selectedCourses.map((cid: string) => {
-                  return (
-                    <tr key={cid}>
-                      <td>{cid}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </Table> */}
           </div>
         </Col>
       </Row>
