@@ -10,10 +10,10 @@ function TopMenuNavbar() {
     <Navbar className="bottom-nav justify-content-end">
       <Nav as="ul">
         <Nav.Item className="text-center" as="li">
-          <Nav.Link href="#" eventKey="select">Select Courses</Nav.Link>
+          <Nav.Link className="noto-sans" href="#" eventKey="select">Select Courses</Nav.Link>
         </Nav.Item>
         <Nav.Item className="text-center" as="li">
-          <Nav.Link href="#" eventKey="view">View Selected</Nav.Link>
+          <Nav.Link className="noto-sans" href="#" eventKey="view">View Selected</Nav.Link>
         </Nav.Item>
       </Nav>
     </Navbar>

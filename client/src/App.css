@@ -1,9 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
-
 /* Root Variables */
 @import './Styling/Constants.css';
-
 
 /* Temp stuff */
 
@@ -21,14 +19,14 @@ body {
 .App {
   text-align: center;
 }
-.head{
-  margin: 0%;
+
+.mams-red {
+  background-color: var(--mams-red) !important;
 }
 
-.mams-red{
-  background-color: var(--mams-red);
+.noto-sans {
+  font-family: var(--noto-sans), sans-serif !important;
 }
-
 
 /* Top Menu/Nav Styling */
 @import './Styling/TopMenu.css';

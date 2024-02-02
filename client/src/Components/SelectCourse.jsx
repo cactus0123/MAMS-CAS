@@ -12,7 +12,7 @@ function SelectCourse({ value, options, onChange, onSubmitCustom }) {
     <>
     <Card className="courses-card">
       <Card.Body>
-        <Card.Title>Select Courses</Card.Title>
+        <Card.Title className="noto-sans">Select Courses</Card.Title>
         {/* <CourseTable /> */}
 
         <Select
@@ -23,7 +23,6 @@ function SelectCourse({ value, options, onChange, onSubmitCustom }) {
           isMulti
           closeMenuOnSelect={false}
           hideSelectedOptions={false}
-          
         />
         
         <EnterCourseMenuWrapper onSubmitCustom={onSubmitCustom}/>
