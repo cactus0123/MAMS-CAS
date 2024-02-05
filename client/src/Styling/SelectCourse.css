@@ -1,0 +1,45 @@
+/* Root Variables */
+@import './Constants.css';
+
+.text-input::placeholder {
+  font-size: 1rem !important;
+  color: #807f7f !important;
+  font-family: var(--noto-sans), sans-serif;
+}
+/* React-Select placeholder text styling */
+.css-1jqq78o-placeholder { 
+  font-size: 1rem !important;
+  color: #807f7f !important;
+  font-family: var(--noto-sans), sans-serif;
+}
+
+.courses-card {
+  background-color: white;
+  text-align: left;
+  max-width: 95%;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.toggle-search {
+  font-size: 0.9rem;
+  padding: 3px 5px;
+  border: 0 !important;
+}
+
+.custom-course-form {
+  padding-left: 10px;
+}
+.custom-course-entry {
+  width: 30%;
+}
+
+div[role$="listbox"] div[role$="option"]{
+  font-family: var(--noto-sans), sans-serif;
+}
+div[role$="listbox"] div[role$="option"]:not([class$=" css-tr4s17-option"]){
+  background-color: #FFFFFF;
+}
+div[role$="listbox"] div[role$="option"]:not([class$=" css-tr4s17-option"]):hover{
+  background-color: #DEEBFF;
+}

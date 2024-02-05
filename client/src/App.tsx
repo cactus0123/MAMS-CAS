@@ -1,112 +1,37 @@
 import React from "react";
-import CourseTable from "./Components/CourseTable.jsx";
-import TopMenu from "./Components/TopMenu.jsx";
-import "./App.css";
+
+/* React Bootstrap Component Imports */
 import { Container, Row, Col } from "react-bootstrap";
 import { Button, Alert, Nav, Table } from "react-bootstrap";
-import Select from "react-select";
+
+/* CSS Imports */
+import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-interface Course {
-  CID: string;
-  TITLE: string;
-}
+/* Custom Component and Container Imports */
+import CourseTable from "./Components/CourseTable";
+import TopMenu from "./Components/TopMenu";
+import SelectCourseAndTablesWrapper from "./Containers/SelectCourseAndTablesWrapper";
+
+// import Column from "antd/es/table/Column.js";
 
 function App() {
-  let input = require("./Components/Courses_v1.json");
-
-  const [selectedCourses, setSelectedCourses] = React.useState<string[]>([]);
-
-  let options = input.map((courses: Course) => {
-    return {
-      value: courses.CID,
-      label: courses.TITLE,
-    };
-  });
-
   return (
     <>
-    {/* menu is this thing here*/}
-    <TopMenu />
+      {/* menu is this thing here*/}
+      <TopMenu />
 
-
-    <div className="App">
-      <div className="head">
-        <ul className="nav justify-content-center mams-red">
-          <li className="nav-item">
-            <a className="nav-link active" href="#">
-              Active
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              Link
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              Link
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link disabled" href="#">
-              Disabled
-            </a>
-          </li>
-        </ul>
-        <div className="card">
-          <div className="card-header">
-            <nav aria-label="breadcrumb">
-              <ol className="breadcrumb">
-                <li className="breadcrumb-item">Test 1</li>
-                <li className="breadcrumb-item">Test 2</li>
-                <li className="breadcrumb-item active">Test 3</li>
-              </ol>
-            </nav>
-            <Alert variant="primary">Welcome to MAMAS CAS!</Alert>
-            <Button>This is a bootstrap button</Button>
-          </div>
-        </div>
-      </div>
-
-      <div className="card courses-card">
-        <h2 className="card-title">Available Courses</h2>
-        {/* <CourseTable /> */}
-        <Select
-          options={options}
-          onChange={(
-            selectedOption: { value: string; label: string } | null
-          ) => {
-            if (selectedOption != null) {
-              console.log(selectedOption.value);
-              setSelectedCourses([...selectedCourses, selectedOption.value]);
-            }
-          }}
-        ></Select>
-      </div>
-
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Course ID</th>
-          </tr>
-        </thead>
-        <tbody>
-          {selectedCourses.map((cid: string) => {
-            const course = input.find((c: Course) => c.CID === cid);
-            return (
-              <tr key={cid}>
-                <td>{cid}</td>
-                <td></td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
-    </div>
+      <Container className="temp-cont" fluid>
+        <Row>
+          <Col>
+            <div className="App">
+              <SelectCourseAndTablesWrapper />
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }
 
 export default App;
-
