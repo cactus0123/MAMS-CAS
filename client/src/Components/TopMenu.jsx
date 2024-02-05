@@ -25,7 +25,7 @@ function TopMenu() {
           
         </Navbar.Brand>
         <Navbar.Text className="nav-title text-white">
-          MAMS Course Assignment<br/>System or smthin
+          MAMS Course Assignment System
         </Navbar.Text>
       </Container>
 
