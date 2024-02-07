@@ -8,6 +8,8 @@ import loginIcon from '../Media/login-icon.png';
 
 import TopMenuNavbar from './TopMenuNavbar.jsx'
 
+import { Link } from 'react-router-dom';
+
 function TopMenu() {
 
   return (
@@ -29,7 +31,8 @@ function TopMenu() {
         </Navbar.Text>
       </Container>
 
-      <Button className="login-button d-flex align-items-center" variant="link" href="#">
+      <Button className="login-button d-flex align-items-center" variant="link">
+        <Link to="../Pages/login">
         <span className="login-text">Login</span>
         <img 
           className="login-icon"
@@ -38,6 +41,7 @@ function TopMenu() {
           height={25}
           width={25}
         />
+        </Link>
       </Button>
       
 

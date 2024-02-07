@@ -13,11 +13,20 @@ import CourseTable from "./Components/CourseTable";
 import TopMenu from "./Components/TopMenu";
 import SelectCourseAndTablesWrapper from "./Containers/SelectCourseAndTablesWrapper";
 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+
+import Login from "./Pages/login";
+
 // import Column from "antd/es/table/Column.js";
 
 function App() {
   return (
     <>
+    <Router>
       {/* menu is this thing here*/}
       <TopMenu />
 
@@ -30,6 +39,10 @@ function App() {
           </Col>
         </Row>
       </Container>
+      <Routes>
+        <Route exact path="/login" component={Login} />
+      </Routes>
+    </Router>
     </>
   );
 }
