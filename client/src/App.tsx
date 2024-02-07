@@ -26,6 +26,7 @@ function App() {
           <Col>
             <div className="App">
               <SelectCourseAndTablesWrapper />
+              <Button>Submit</Button>
             </div>
           </Col>
         </Row>

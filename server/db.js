@@ -1,5 +1,5 @@
 const Pool = require("pg").Pool;
-const { Pool } = require("pg");
+//const { Pool } = require("pg");
 
 //local db for testing purposes
 const pool = new Pool({

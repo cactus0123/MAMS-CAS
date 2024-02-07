@@ -59,7 +59,7 @@ app.put("/student/:id", async (req, res) => {
     );
     res.json("Student Updated");
   } catch (err) {
-    console.log(err.message);
+    console.error(err.message);
   }
 });
 
@@ -74,7 +74,22 @@ app.delete("/student/:id", async (req, res) => {
     );
     res.json("Student Deletes");
   } catch (err) {
-    console.log(err.message);
+    console.error(err.message);
+  }
+});
+
+app.post("/submit-courses", async (req, res) => {
+  try {
+    const { selectedCourses } = req.body;
+
+    for (const course of selectedCourses) {
+      await pool.query(
+        "INSERT INTO course_requests (cid, title) VALUES ($1, $2)",
+        [course.value, course.label]
+      );
+    }
+  } catch (error) {
+    console.error(error.message);
   }
 });
 
