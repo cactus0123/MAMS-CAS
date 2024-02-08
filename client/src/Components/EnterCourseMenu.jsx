@@ -12,7 +12,7 @@ function EnterCourseMenu( {handleClick, active, handleSubmit} ) {
 
     <Accordion className="custom-course-form" activeKey={active ? "0" : null}>
       <Accordion.Collapse eventKey="0">
-        <Form className="" onSubmit={handleSubmit}>
+        <Form className="custom-course-entry" onSubmit={handleSubmit}>
           <Form.Control className="noto-sans text-input" name="course" type="text" placeholder="Enter course ID"/>
         </Form>
       </Accordion.Collapse>
