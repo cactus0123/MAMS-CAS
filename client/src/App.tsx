@@ -20,6 +20,7 @@ import {
 } from "react-router-dom";
 
 import Login from "./Pages/login";
+import Home from "./Pages/home";
 
 // import Column from "antd/es/table/Column.js";
 
@@ -30,17 +31,9 @@ function App() {
       {/* menu is this thing here*/}
       <TopMenu />
 
-      <Container className="temp-cont" fluid>
-        <Row>
-          <Col>
-            <div className="App">
-              <SelectCourseAndTablesWrapper />
-            </div>
-          </Col>
-        </Row>
-      </Container>
       <Routes>
-        <Route exact path="/login" component={Login} />
+        <Route path="/home" element = { <Home /> } />
+        <Route path="/login" element = { <Login /> } />
       </Routes>
     </Router>
     </>
