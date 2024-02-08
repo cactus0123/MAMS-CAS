@@ -19,8 +19,8 @@ import {
   Route,
 } from "react-router-dom";
 
-import Login from "./Pages/login";
-import Home from "./Pages/home";
+import Login from "./Pages/Login";
+import Home from "./Pages/Home";
 
 // import Column from "antd/es/table/Column.js";
 
