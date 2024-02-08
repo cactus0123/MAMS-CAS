@@ -13,10 +13,10 @@
 }
 
 .nav-title {
-  font-family: 'Baskerville', serif;
+  font-family: 'Lato', serif;
   font-weight: bold;
   font-size: 1.5rem;
-  font-style: italic;
+  font-style: plain;
 }
 
 .login-button {
@@ -24,13 +24,11 @@
   padding: 5px 20px !important; 
   border-radius: 20px !important;
   text-decoration: none !important;
-
-  --darker-mams-red: #721922;
   background-color: var(--darker-mams-red) !important;
 }
 
 .login-text {
-  font-family: var(--noto-sans), sans-serif;
+  font-family: var(--lato), sans-serif;
   font-weight: 500;
   font-size: 1.1rem;
   color: white;

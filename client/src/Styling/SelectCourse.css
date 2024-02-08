@@ -4,13 +4,13 @@
 .text-input::placeholder {
   font-size: 1rem !important;
   color: #807f7f !important;
-  font-family: var(--noto-sans), sans-serif;
+  font-family: var(--lato), sans-serif;
 }
 /* React-Select placeholder text styling */
 .css-1jqq78o-placeholder { 
   font-size: 1rem !important;
   color: #807f7f !important;
-  font-family: var(--noto-sans), sans-serif;
+  font-family: var(--lato), sans-serif;
 }
 
 .courses-card {
@@ -35,7 +35,7 @@
 }
 
 div[role$="listbox"] div[role$="option"]{
-  font-family: var(--noto-sans), sans-serif;
+  font-family: var(--lato), sans-serif;
 }
 div[role$="listbox"] div[role$="option"]:not([class$=" css-tr4s17-option"]){
   background-color: #FFFFFF;

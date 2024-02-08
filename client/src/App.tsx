@@ -15,32 +15,23 @@ import SelectCourseAndTablesWrapper from "./Containers/SelectCourseAndTablesWrap
 
 // import Column from "antd/es/table/Column.js";
 
-
-
-
-
 function App() {
-
   return (
     <>
-    {/* menu is this thing here*/}
-    <TopMenu />
+      {/* menu is this thing here*/}
+      <TopMenu />
 
-    <Container className="temp-cont" fluid>
-      <Row>
-        <Col>
-          <div className="App">
-
-            <SelectCourseAndTablesWrapper />
-
-          </div>
-        </Col>
-      </Row>
-    </Container>
-
+      <Container className="temp-cont" fluid>
+        <Row>
+          <Col>
+            <div className="App">
+              <SelectCourseAndTablesWrapper />
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }
 
 export default App;
-
