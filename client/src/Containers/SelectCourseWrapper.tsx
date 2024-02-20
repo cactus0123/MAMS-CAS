@@ -2,7 +2,6 @@ import React from "react";
 
 import { useState } from "react";
 import SelectCourse from "../Components/SelectCourse";
-import { Form } from "react-bootstrap";
 
 interface Course {
   CID: string;
