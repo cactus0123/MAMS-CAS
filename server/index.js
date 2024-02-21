@@ -12,10 +12,10 @@ app.use(express.json()); //req.body
 //create
 app.post("/student", async (req, res) => {
   try {
-    const { fName } = req.body;
+    const { first, last, yog } = req.body;
     const newStudent = await pool.query(
-      "INSERT INTO students (fName) VALUES($1) RETURNING *",
-      [fName]
+      "INSERT INTO students (first, last, yog) VALUES($1, $2, $3) RETURNING *",
+      [first, last, yog]
     ); //(description) is column name, ($1) is var for [fName]
 
     res.json(newStudent.rows[0]);
