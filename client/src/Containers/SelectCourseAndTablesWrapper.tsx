@@ -24,13 +24,13 @@ function SelectCourseAndTablesWrapper() {
 
   async function handleSubmit() {
     try {
-      console.log(JSON.stringify(selectedCoursesElems));
+      console.log(JSON.stringify(selectedCourses));
       const response = await fetch("http://localhost:5100/submit-courses", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(selectedCoursesElems),
+        body: JSON.stringify(selectedCourses),
       });
 
       if (!response.ok) {
