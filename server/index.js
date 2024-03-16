@@ -72,7 +72,7 @@ app.delete("/student/:id", async (req, res) => {
       "DELETE FROM students WHERE studentpk=$1",
       [id]
     );
-    res.json("Student Deletes");
+    res.json("Student Deleted");
   } catch (err) {
     console.error(err.message);
   }
@@ -84,10 +84,12 @@ app.post("/submit-courses", async (req, res) => {
 
     for (const course of selectedCourses) {
       await pool.query(
-        "INSERT INTO course_requests (cid, title) VALUES ($1, $2)",
-        [course.value, course.label]
+        "INSERT INTO courserequests (cid, studentid) VALUES ($1, $2)",
+        [course.value, 3]
       );
     }
+
+    res.json("Courses Submitted");
   } catch (error) {
     console.error(error.message);
   }

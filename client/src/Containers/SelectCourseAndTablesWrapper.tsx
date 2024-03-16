@@ -24,6 +24,7 @@ function SelectCourseAndTablesWrapper() {
 
   async function handleSubmit() {
     try {
+      console.log(JSON.stringify(selectedCoursesElems));
       const response = await fetch("http://localhost:5100/submit-courses", {
         method: "POST",
         headers: {
@@ -31,6 +32,13 @@ function SelectCourseAndTablesWrapper() {
         },
         body: JSON.stringify(selectedCoursesElems),
       });
+
+      if (!response.ok) {
+        throw new Error(`Error status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -43,7 +51,7 @@ function SelectCourseAndTablesWrapper() {
         setSelectedCourses={setSelectedCourses}
       />
       <SelectedCourseTables selectedCourses={selectedCoursesElems} />
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" onClick={handleSubmit}>
         Submit
       </Button>
     </>
