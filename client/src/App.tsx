@@ -11,25 +11,30 @@ import "bootstrap/dist/css/bootstrap.min.css";
 /* Custom Component and Container Imports */
 import CourseTable from "./Components/CourseTable";
 import TopMenu from "./Components/TopMenu";
-import SelectCourseAndTablesWrapper from "./Containers/SelectCourseAndTablesWrapper";
+
+import SelectCoursePage from "./Pages/SelectCoursePage";
+import ViewCoursePage from "./Pages/ViewCoursePage";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // import Column from "antd/es/table/Column.js";
 
+// select and view are the available contexts
+
 function App() {
+
   return (
     <>
-      {/* menu is this thing here*/}
-      <TopMenu />
-
-      <Container className="temp-cont" fluid>
-        <Row>
-          <Col>
-            <div className="App">
-              <SelectCourseAndTablesWrapper />
-            </div>
-          </Col>
-        </Row>
-      </Container>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<TopMenu />}>
+            <Route index element={<SelectCoursePage />} />
+            <Route path="select" element={<SelectCoursePage />} />
+            <Route path="view" element={<ViewCoursePage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+      
     </>
   );
 }

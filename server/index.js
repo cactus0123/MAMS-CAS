@@ -79,8 +79,9 @@ app.delete("/student/:id", async (req, res) => {
 });
 
 app.post("/submit-courses", async (req, res) => {
+  
   try {
-    const { selectedCourses } = req.body;
+    const selectedCourses = req.body;
 
     for (const course of selectedCourses) {
       await pool.query(
