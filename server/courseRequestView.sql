@@ -11,5 +11,5 @@ SELECT
     courses."MAMS Prerequisites",
     cr.status,
     cr.note
-FROM courserequests cr
+FROM course_requests cr
 JOIN courses ON cr.cid = courses.cid;
