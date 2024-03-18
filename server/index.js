@@ -85,8 +85,8 @@ app.post("/submitted-courses", async (req, res) => {
 
     for (const course of selectedCourses) {
       await pool.query(
-        "INSERT INTO courserequests (cid, studentid) VALUES ($1, $2)",
-        [course.value, 3]
+        "INSERT INTO course_requests (cid, studentid, status) VALUES ($1, $2, $3)",
+        [course.value, 3, false]
       );
     }
 
