@@ -78,7 +78,7 @@ app.delete("/student/:id", async (req, res) => {
   }
 });
 
-app.post("/submit-courses", async (req, res) => {
+app.post("/submitted-courses", async (req, res) => {
   
   try {
     const selectedCourses = req.body;
@@ -95,6 +95,15 @@ app.post("/submit-courses", async (req, res) => {
     console.error(error.message);
   }
 });
+
+app.get("/submitted-courses", async (req, res) => {
+  try {
+    const allSubmittedCourses = await pool.query("SELECT * FROM courserequests");
+    res.json(allSubmittedCourses.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+})
 
 app.listen(5100, () => {
   console.log("server has started on port 5100");

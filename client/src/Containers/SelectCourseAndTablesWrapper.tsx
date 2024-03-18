@@ -24,8 +24,7 @@ function SelectCourseAndTablesWrapper() {
 
   async function handleSubmit() {
     try {
-      console.log(JSON.stringify(selectedCourses));
-      const response = await fetch("http://localhost:5100/submit-courses", {
+      const response = await fetch("http://localhost:5100/submitted-courses", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,7 +37,6 @@ function SelectCourseAndTablesWrapper() {
       }
 
       const data = await response.json();
-      console.log(data);
     } catch (error) {
       console.error(error);
     }
