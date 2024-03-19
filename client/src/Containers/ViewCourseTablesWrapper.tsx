@@ -1,8 +1,8 @@
 import ViewCourseTable from "../Components/ViewCourseTable";
 
-import { Dispatch, SetStateAction, useState, useEffect } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 
-import { useRequestedCourses } from "../Hooks/useRequestedCourses";
+import { RequestedCoursesContext } from "../Contexts/RequestedCoursesContext";
 
 type RequestedCourse = {
   studentid: string;
@@ -32,7 +32,7 @@ function createRows(data: RequestedCourse[]|null) {
 
 
 function ViewCourseTablesWrapper() {
-  const { requestedCourses, refreshRequestedCourses } = useRequestedCourses();
+  const { requestedCourses, refreshRequestedCourses } = useContext(RequestedCoursesContext);
   
   return (
   <>

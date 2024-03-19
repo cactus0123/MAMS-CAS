@@ -72,3 +72,10 @@ tr:hover td {
   width: 95% !important;
   text-align: center;
 }
+.view-course-table {
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  margin-top: 30px;
+  width: 95% !important;
+  text-align: center;
+}
