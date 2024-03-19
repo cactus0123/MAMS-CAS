@@ -3,6 +3,8 @@ const app = express();
 const cors = require("cors");
 const pool = require("./db");
 
+const { getCurrentDate } = require("./util");
+
 //middleware
 app.use(cors());
 app.use(express.json()); //req.body
@@ -85,8 +87,8 @@ app.post("/submitted-courses", async (req, res) => {
 
     for (const course of selectedCourses) {
       await pool.query(
-        "INSERT INTO course_requests (cid, studentid, status) VALUES ($1, $2, $3)",
-        [course.value, 3, false]
+        "INSERT INTO course_requests (cid, studentid, status, request_date) VALUES ($1, $2, $3, $4)",
+        [course.value, 3, false, getCurrentDate()]
       );
     }
 
@@ -98,7 +100,7 @@ app.post("/submitted-courses", async (req, res) => {
 
 app.get("/submitted-courses", async (req, res) => {
   try {
-    const allSubmittedCourses = await pool.query("SELECT * FROM courserequests");
+    const allSubmittedCourses = await pool.query("SELECT * FROM course_requests");
     res.json(allSubmittedCourses.rows);
   } catch (err) {
     console.error(err.message);
