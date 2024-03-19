@@ -3,6 +3,7 @@ import React from "react";
 import { Table } from "react-bootstrap";
 
 function SelectedCourseTables({ selectedCourses }) {
+
   return (
     <>
     <Table striped className="preview-selected-table rounded custom-border custom-hover">
@@ -15,6 +16,7 @@ function SelectedCourseTables({ selectedCourses }) {
         {selectedCourses}
       </tbody>
     </Table>
+    
     </>
   )
 }

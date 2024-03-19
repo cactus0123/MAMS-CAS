@@ -14,6 +14,8 @@ import ViewCoursePage from "./Pages/ViewCoursePage";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import { RequestedCoursesArea } from "./Contexts/RequestedCoursesContext";
+
 // import Column from "antd/es/table/Column";
 
 // select and view are the available contexts
@@ -21,15 +23,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<TopMenu />}>
-            <Route index element={<SelectCoursePage />} />
-            <Route path="select" element={<SelectCoursePage />} />
-            <Route path="view" element={<ViewCoursePage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <RequestedCoursesArea>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<TopMenu />}>
+              <Route index element={<SelectCoursePage />} />
+              <Route path="select" element={<SelectCoursePage />} />
+              <Route path="view" element={<ViewCoursePage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </RequestedCoursesArea>
     </>
   );
 }

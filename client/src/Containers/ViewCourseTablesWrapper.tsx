@@ -2,21 +2,13 @@ import ViewCourseTable from "../Components/ViewCourseTable";
 
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
 
-type Course = {
+import { useRequestedCourses } from "../Hooks/useRequestedCourses";
+
+type RequestedCourse = {
   studentid: string;
   cid: string;
 };
 
-async function getSubmittedCourses(setData: Dispatch<SetStateAction<Course[] | null>>) {
-  try {
-    const response = await fetch("http://localhost:5100/submitted-courses")
-    const data = await response.json();
-    setData(data);
-
-  } catch (err) {
-    console.error(err);
-  }
-}
 
 function createHeaders() {
   const headers = ["Course ID"];
@@ -27,27 +19,24 @@ function createHeaders() {
   )
 }
 
-function createRows(data: Course[]|null) {
+function createRows(data: RequestedCourse[]|null) {
   if (data === null) {
     return (<tr><td>not loaded</td></tr>);
   }
   return (
   <>
-    {data.map((entry: Course, index) => <tr key={index}><td key={"cid"}>{entry.cid}</td></tr>)}
+    {data.map((entry: RequestedCourse, index) => <tr key={index}><td key={"cid"}>{entry.cid}</td></tr>)}
   </>
   )
 }
 
 
 function ViewCourseTablesWrapper() {
-  const [ data, setData ] = useState<Course[]|null>(null);
-  useEffect(() => {
-    getSubmittedCourses(setData)
-  }, []);
-
+  const { requestedCourses, refreshRequestedCourses } = useRequestedCourses();
+  
   return (
   <>
-    <ViewCourseTable headers={createHeaders()} rows={createRows(data)}/>
+    <ViewCourseTable headers={createHeaders()} rows={createRows(requestedCourses)}/>
   </>
   )
 }

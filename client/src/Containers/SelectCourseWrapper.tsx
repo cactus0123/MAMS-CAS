@@ -1,9 +1,14 @@
 import React from "react";
 
 import { useState, useContext } from "react";
+import { RequestedCourse } from "../Hooks/useRequestedCourses";
+
 import SelectCourse from "../Components/SelectCourse";
 import { FormValidatedContext } from "../Contexts/FormValidatedContext";
+import { RequestedCoursesContext } from "../Contexts/RequestedCoursesContext";
+
 import { Form } from "react-bootstrap";
+import { request } from "http";
 
 interface Course {
   CID: string;
@@ -23,15 +28,21 @@ type courseSelecterSetter = (input: Option[] | prevFunc) => void;
  *
  * @returns array of objects each containing a value and label equal to a course CID
  */
-function getCourseOptions(): { value: string; label: string }[] {
+function getCourseOptions(requestedCourses: RequestedCourse[] | null): { value: string; label: string }[] {
   let input = require("../Components/Courses_v1.json");
-
+  
   let options = input.map((courses: Course) => {
     return {
       value: courses.CID,
       label: courses.CID,
     };
   });
+  if (requestedCourses !== null) {
+    options = options.filter((course: Option) => {
+      return !requestedCourses.some((requestedCourse) => requestedCourse.cid === course.value);
+    })
+  }
+
   return options;
 }
 
@@ -44,8 +55,9 @@ function SelectCourseWrapper({
 }) {
   //const [currentlySelected, setCurrentlySelected] = useState<string[]>();
   const { setValidity, toggleDisplayFeedback, setFeedback } = useContext(FormValidatedContext);
+  const { requestedCourses } = useContext(RequestedCoursesContext);
   
-  const options = getCourseOptions();
+  const options = getCourseOptions(requestedCourses);
 
   const changeHandler = (selectedOptions: Option[] | null) => {
     if (selectedOptions != null) {
@@ -73,7 +85,11 @@ function SelectCourseWrapper({
       value: customCourseID.toUpperCase(),
       label: customCourseID.toUpperCase(),
     };
-    const notDuplicate = !selectedCourses.some((course) => course.value === customCourseOption.value);
+    let notDuplicate = !selectedCourses.some((course) => course.value === customCourseOption.value);
+    
+    if (requestedCourses !== null) {
+      notDuplicate = notDuplicate && !requestedCourses.some((course) => course.cid === customCourseOption.value);
+    }
     const notEmpty = !(customCourseOption.value === "");
     toggleDisplayFeedback(true);
     if (notDuplicate && notEmpty) {

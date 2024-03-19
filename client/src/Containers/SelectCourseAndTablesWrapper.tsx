@@ -1,6 +1,7 @@
 import React from "react";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { RequestedCoursesContext } from "../Contexts/RequestedCoursesContext";
 
 import SelectCourseWrapper from "./SelectCourseWrapper";
 import SelectedCourseTables from "../Components/SelectedCourseTables";
@@ -13,6 +14,7 @@ interface Option {
 
 function SelectCourseAndTablesWrapper() {
   const [selectedCourses, setSelectedCourses] = useState<Option[]>([]);
+  const { refreshRequestedCourses } = useContext(RequestedCoursesContext);
 
   const selectedCoursesElems = selectedCourses.map((cid: Option) => {
     return (
@@ -37,9 +39,11 @@ function SelectCourseAndTablesWrapper() {
       }
 
       const data = await response.json();
+      refreshRequestedCourses();
     } catch (error) {
       console.error(error);
     }
+    setSelectedCourses([]);
   }
 
   return (
