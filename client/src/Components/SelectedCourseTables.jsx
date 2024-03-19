@@ -5,7 +5,7 @@ import { Table } from "react-bootstrap";
 function SelectedCourseTables({ selectedCourses }) {
   return (
     <>
-    <Table striped bordered hover>
+    <Table striped className="preview-selected-table rounded custom-border custom-hover">
       <thead>
         <tr>
           <th>Course ID</th>
@@ -18,5 +18,7 @@ function SelectedCourseTables({ selectedCourses }) {
     </>
   )
 }
+
+
 
 export default SelectedCourseTables;

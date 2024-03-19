@@ -6,7 +6,6 @@ function ViewCoursePage() {
   <>
     <div>
       <ViewCourseTablesWrapper />
-      <p>Wowzers</p>
     </div>
   </>
   )

@@ -1,6 +1,10 @@
 /* Root Variables */
 @import './Constants.css';
 
+
+/* select and enter menu */
+
+
 .text-input::placeholder {
   font-size: 1rem !important;
   color: #807f7f !important;
@@ -20,6 +24,14 @@
   margin: auto;
   margin-top: 30px;
 }
+.preview-selected-card {
+  background-color: white;
+  background-color: white;
+  text-align: left;
+  max-width: 95%;
+  margin: auto;
+  margin-top: 15px;
+}
 
 .toggle-search {
   font-size: 0.9rem;
@@ -31,7 +43,7 @@
   padding-left: 10px;
 }
 .custom-course-entry {
-  width: 98%;
+  width: 99%;
 }
 
 div[role$="listbox"] div[role$="option"]{
@@ -42,4 +54,13 @@ div[role$="listbox"] div[role$="option"]:not([class$=" css-tr4s17-option"]){
 }
 div[role$="listbox"] div[role$="option"]:not([class$=" css-tr4s17-option"]):hover{
   background-color: #DEEBFF;
+}
+
+
+/* submit button */
+.submit-selected-button {
+  width: 100%;
+  max-width: 100px;
+  margin: auto;
+  
 }

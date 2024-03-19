@@ -28,8 +28,21 @@ body {
   font-family: var(--noto-sans), sans-serif !important;
 }
 
+.container.center-contents {
+  margin: auto;
+  padding: 0;
+  border: 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+}
+
 /* Top Menu/Nav Styling */
 @import './Styling/TopMenu.css';
 
 /* Course Select Card Styling*/
 @import './Styling/SelectCourse.css';
+
+/* Tables Styling */
+@import './Styling/Tables.css';

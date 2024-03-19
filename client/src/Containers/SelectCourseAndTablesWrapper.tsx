@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import SelectCourseWrapper from "./SelectCourseWrapper";
 import SelectedCourseTables from "../Components/SelectedCourseTables";
-import { Button } from "react-bootstrap";
+import { Card, Button, Container } from "react-bootstrap";
 
 interface Option {
   value: string;
@@ -48,10 +48,20 @@ function SelectCourseAndTablesWrapper() {
         selectedCourses={selectedCourses}
         setSelectedCourses={setSelectedCourses}
       />
-      <SelectedCourseTables selectedCourses={selectedCoursesElems} />
-      <Button variant="primary" type="submit" onClick={handleSubmit}>
-        Submit
-      </Button>
+      <Card className="preview-selected-card">
+        <Card.Body>
+          <Card.Title className="noto-sans">Courses Preview</Card.Title>
+          
+          <SelectedCourseTables selectedCourses={selectedCoursesElems} />
+          <Container className="center-contents">
+            <Button className="submit-selected-button" variant="primary" type="submit" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </Container>
+        
+        </Card.Body>
+      </Card>
+      
     </>
   );
 }

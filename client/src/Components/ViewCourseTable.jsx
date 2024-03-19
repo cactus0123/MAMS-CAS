@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap';
 function ViewCourseTable({headers, rows}) {
   return (
   <>
-    <Table striped bordered hover>
+    <Table striped className="view-course-table rounded custom-border custom-hover">
       <thead>
         <tr>
           {headers}

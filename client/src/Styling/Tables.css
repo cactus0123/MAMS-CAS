@@ -1,0 +1,74 @@
+/* Root Variables */
+@import './Constants.css';
+
+/* default */
+th, td {
+  border-width: 0px !important;
+  box-sizing: content-box;
+  position: relative;
+}
+
+/* border */
+table.custom-border th::after, td::after {
+  content: '';
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid lightgray !important;
+  border-right: 1px solid lightgray !important;
+}
+table.custom-border th::after {
+  border-top: 1px solid lightgray !important;
+}
+
+table.custom-border tr > :is(td:first-of-type, th:first-of-type)::after {
+  border-left: 1px solid lightgray !important;
+}
+
+
+/* rounded */
+
+/* top left and top right */
+table.rounded tr:first-of-type th:first-of-type,
+table.rounded tr:first-of-type th:first-of-type::after {
+  border-top-left-radius: 10px;
+}
+table.rounded tr:first-of-type th:last-of-type,
+table.rounded tr:first-of-type th:last-of-type::after {
+  border-top-right-radius: 10px;
+}
+/* bottom left and bottom right */
+table.rounded tr:last-of-type td:first-of-type,
+table.rounded tr:last-of-type td:first-of-type::after {
+  border-bottom-left-radius: 10px;
+}
+table.rounded tr:last-of-type td:last-of-type,
+table.rounded tr:last-of-type td:last-of-type::after {
+  border-bottom-right-radius: 10px;
+}
+/* bottom left and bottom right if there is no tbody */
+table.rounded:has(> tbody:empty) tr:last-of-type th:first-of-type,
+table.rounded:has(> tbody:empty) tr:last-of-type th:first-of-type::after {
+  border-bottom-left-radius: 10px;
+}
+table.rounded:has(> tbody:empty) tr:last-of-type th:last-of-type,
+table.rounded:has(> tbody:empty) tr:last-of-type th:last-of-type::after {
+  border-bottom-right-radius: 10px;
+}
+
+/* hover */
+tr:hover td {
+  background-color: rgb(228, 228, 228) !important;
+}
+
+
+/* individual table styling */
+
+.preview-selected-table {
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  width: 95% !important;
+  text-align: center;
+}
