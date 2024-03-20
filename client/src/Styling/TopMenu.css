@@ -33,6 +33,7 @@
   font-size: 1.1rem;
   color: white;
   margin-right: 6px;
+  white-space: nowrap;
 }
 .login-text, .login-icon {
   filter: brightness(0.95);

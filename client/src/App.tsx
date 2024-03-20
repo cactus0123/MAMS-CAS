@@ -12,9 +12,11 @@ import TopMenu from "./Components/TopMenu";
 import SelectCoursePage from "./Pages/SelectCoursePage";
 import ViewCoursePage from "./Pages/ViewCoursePage";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { RequestedCoursesArea } from "./Contexts/RequestedCoursesContext";
+import { useIsAuthenticated } from "@azure/msal-react";
+import AuthHandler from "./AuthHandler";
 
 // import Column from "antd/es/table/Column";
 
@@ -26,8 +28,10 @@ function App() {
       <RequestedCoursesArea>
         <BrowserRouter>
           <Routes>
+            <Route path="/auth" element={<AuthHandler />} />
+
             <Route path="/" element={<TopMenu />}>
-              <Route index element={<SelectCoursePage />} />
+              <Route index element={<Navigate to="/select" />} />
               <Route path="select" element={<SelectCoursePage />} />
               <Route path="view" element={<ViewCoursePage />} />
             </Route>

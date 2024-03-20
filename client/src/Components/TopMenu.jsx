@@ -4,9 +4,10 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Navbar, Button } from 'react-bootstrap';
 
 import logo from '../Media/mams-logo.png';
-import loginIcon from '../Media/login-icon.png';
 
-import TopMenuNavbarWrapper from '../Containers/TopMenuNavbarWrapper.tsx'
+
+import TopMenuNavbarWrapper from '../Containers/TopMenuNavbarWrapper.tsx';
+import LoginLogoutButtonWrapper from '../Containers/LoginLogoutButtonWrapper';
 
 import { Outlet} from "react-router-dom";
 
@@ -32,18 +33,7 @@ function TopMenu() {
           </Navbar.Text>
         </Container>
 
-        <Button className="login-button d-flex align-items-center" variant="link" href="">
-          <span className="login-text">Login</span>
-          <img 
-            className="login-icon"
-            src={loginIcon} 
-            alt="login"
-            height={25}
-            width={25}
-          />
-        </Button>
-        
-
+        <LoginLogoutButtonWrapper />
 
       </Navbar>
 
