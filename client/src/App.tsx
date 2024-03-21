@@ -14,30 +14,32 @@ import ViewCoursePage from "./Pages/ViewCoursePage";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import { RequestedCoursesArea } from "./Contexts/RequestedCoursesContext";
-import { useIsAuthenticated } from "@azure/msal-react";
+import { StudentDataArea, UserDataArea } from "./Contexts/UserDataContext";
+import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import AuthHandler from "./AuthHandler";
 
 // import Column from "antd/es/table/Column";
 
-// select and view are the available contexts
 
 function App() {
   return (
     <>
-      <RequestedCoursesArea>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/auth" element={<AuthHandler />} />
+      <UserDataArea>
+        <StudentDataArea>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/auth/redirect" element={<div>Processing authentication response...</div>} />
+              <Route path="/auth" element={<AuthHandler />} />
 
-            <Route path="/" element={<TopMenu />}>
-              <Route index element={<Navigate to="/select" />} />
-              <Route path="select" element={<SelectCoursePage />} />
-              <Route path="view" element={<ViewCoursePage />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </RequestedCoursesArea>
+              <Route path="/" element={<TopMenu />}>
+                <Route index element={<Navigate to="/select" />} />
+                <Route path="select" element={<SelectCoursePage />} />
+                <Route path="view" element={<ViewCoursePage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </StudentDataArea>
+      </UserDataArea>
     </>
   );
 }

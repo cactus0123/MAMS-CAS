@@ -1,38 +1,107 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useMsal, useIsAuthenticated } from "@azure/msal-react";
 
-import { useMsal } from '@azure/msal-react';
+import { loginRequest } from './authConfig';
+import { callMsGraph } from './graph';
 
+import { useStudentData } from './Contexts/UserDataContext';
+
+
+export async function checkStudentData(studentData) {
+  if (studentData.studentid && studentData.email) {
+    try {
+      /* get current students to check if signed in student exists */
+      const getResponse = await fetch("http://localhost:5100/student/" + studentData.studentid)
+      const student = await getResponse.json();
+
+      /* create new student if not existing */
+      if (student === null) {
+        console.log(studentData);
+        const postResponse = await fetch('http://localhost:5100/student', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(studentData),
+        });
+        if (!postResponse.ok) {
+          throw new Error('Failed to create student record');
+        }
+    
+        const createdStudent = await postResponse.json();
+        console.log('Created student:', createdStudent);
+      }
+  
+    } catch (err) {
+      console.error(err);
+    }
+  }
+}
 
 const AuthHandler = () => {
-  const msalInstance = useMsal();
-  const location = useLocation();
-  const nav = useNavigate();
+  // const { instance, accounts } = useMsal();
+  // const isAuthenticated = useIsAuthenticated();
+  const navigate = useNavigate();
+  
+  // const studentData = useStudentData();
+  // console.log(studentData);
 
+  // async function checkStudentData() {
+  //   if (studentData.studentid && studentData.email) {
+  //     try {
+  //       /* get current students to check if signed in student exists */
+  //       const getResponse = await fetch("http://localhost:5100/student/" + studentData.studentid)
+  //       const student = await getResponse.json();
+
+  //       /* create new student if not existing */
+  //       if (student === null) {
+  //         const postResponse = await fetch('http://localhost:5100/students', {
+  //           method: 'POST',
+  //           headers: {
+  //             'Content-Type': 'application/json',
+  //           },
+  //           body: JSON.stringify(studentData),
+  //         });
+  //         if (!postResponse.ok) {
+  //           throw new Error('Failed to create student record');
+  //         }
+      
+  //         const createdStudent = await postResponse.json();
+  //         console.log('Created student:', createdStudent);
+  //       }
+    
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   }
+
+    
+  // }
+    
+  // function RequestAccessToken() {
+  //   if (isAuthenticated && accounts[0]) {
+  //     instance
+  //       .acquireTokenSilent({
+  //         ...loginRequest,
+  //         account: accounts[0],
+  //       })
+  //       .then((response) => {
+  //         console.log("accessToken:", response.accessToken);
+  //         console.log("Response:", JSON.stringify(response));
+  //         navigate("/select");
+  //       });
+  //   }
+  // }
+  // useEffect(() => {
+  //   RequestAccessToken();
+  // }, [isAuthenticated]);
   useEffect(() => {
-    // Function to handle authentication response
-    const handleAuthenticationResponse = async () => {
-      try {
-        const authResponse = await msalInstance.handleRedirectPromise();
-        if (authResponse) {
-          // Authentication successful, extract tokens or authorization code
-          const accessToken = authResponse.accessToken;
-          const idToken = authResponse.idToken;
-          
-          // localStorage.setItem('accessToken', accessToken);
-          // localStorage.setItem('idToken', idToken);
-
-        }
-      } catch (error) {
-        console.error('Error handling authentication response:', error);
-        
-      }
-    };
-
-    handleAuthenticationResponse();
-  }, [location, nav]);
+    navigate("/select");
+    // checkStudentData();
+  });
+  
   return <div>Processing authentication response...</div>;
 };
 
 export default AuthHandler;
-

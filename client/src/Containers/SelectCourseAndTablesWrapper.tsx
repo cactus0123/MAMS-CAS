@@ -1,21 +1,24 @@
 import React from "react";
 
 import { useState, useContext } from "react";
-import { RequestedCoursesContext } from "../Contexts/RequestedCoursesContext";
+import { useStudentData } from "../Contexts/UserDataContext";
 
 import SelectCourseWrapper from "./SelectCourseWrapper";
 import SelectedCourseTables from "../Components/SelectedCourseTables";
 import { Card, Button, Container } from "react-bootstrap";
+
+import { checkStudentData } from "../AuthHandler";
 
 interface Option {
   value: string;
   label: string;
 }
 
+
 function SelectCourseAndTablesWrapper() {
   const [selectedCourses, setSelectedCourses] = useState<Option[]>([]);
-  const { refreshRequestedCourses } = useContext(RequestedCoursesContext);
-
+  const { studentData, refreshRequestedCourses } = useStudentData();
+  
   const selectedCoursesElems = selectedCourses.map((cid: Option) => {
     return (
       <tr key={cid.value}>
@@ -25,8 +28,10 @@ function SelectCourseAndTablesWrapper() {
   });
 
   async function handleSubmit() {
+    await checkStudentData(studentData);
     try {
-      const response = await fetch("http://localhost:5100/submitted-courses", {
+      
+      const response = await fetch("http://localhost:5100/submitted-courses/" + studentData.studentid, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

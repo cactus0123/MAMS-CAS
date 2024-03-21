@@ -2,10 +2,8 @@ import SelectCourseAndTablesWrapper from "../Containers/SelectCourseAndTablesWra
 import ViewCourseTablesWrapper from "../Containers/ViewCourseTablesWrapper";
 
 import { useContext } from "react";
-import { RequestedCoursesContext } from "../Contexts/RequestedCoursesContext";
 
 function ViewCoursePage() {
-  const { requestedCourses } = useContext(RequestedCoursesContext);
   return (
   <>
     <div>

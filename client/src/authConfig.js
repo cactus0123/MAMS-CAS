@@ -15,10 +15,10 @@ export const msalConfig = {
     auth: {
         clientId: "9ae495d8-10e9-4d37-b909-3d5245100425",
         authority: "https://login.microsoftonline.com/589c76f5-ca15-41f9-884b-55ec15a0672a",
-        redirectUri: "http://localhost:3000/auth",
+        redirectUri: "http://localhost:3000/auth/redirect",
     },
     cache: {
-        cacheLocation: "sessionStorage", // This configures where your cache will be stored
+        cacheLocation: "localStorage", // This configures where your cache will be stored
         storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
     },
     system: {	

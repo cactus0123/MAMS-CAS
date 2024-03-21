@@ -1,14 +1,18 @@
 import React from "react";
 
 import { useState, useContext } from "react";
-import { RequestedCourse } from "../Hooks/useRequestedCourses";
 
 import SelectCourse from "../Components/SelectCourse";
 import { FormValidatedContext } from "../Contexts/FormValidatedContext";
-import { RequestedCoursesContext } from "../Contexts/RequestedCoursesContext";
+import { useStudentData } from "../Contexts/UserDataContext";
 
 import { Form } from "react-bootstrap";
 import { request } from "http";
+
+export type RequestedCourse = {
+  studentid: string;
+  cid: string;
+};
 
 interface Course {
   CID: string;
@@ -55,7 +59,7 @@ function SelectCourseWrapper({
 }) {
   //const [currentlySelected, setCurrentlySelected] = useState<string[]>();
   const { setValidity, toggleDisplayFeedback, setFeedback } = useContext(FormValidatedContext);
-  const { requestedCourses } = useContext(RequestedCoursesContext);
+  const { requestedCourses } = useStudentData();
   
   const options = getCourseOptions(requestedCourses);
 
@@ -88,7 +92,7 @@ function SelectCourseWrapper({
     let notDuplicate = !selectedCourses.some((course) => course.value === customCourseOption.value);
     
     if (requestedCourses !== null) {
-      notDuplicate = notDuplicate && !requestedCourses.some((course) => course.cid === customCourseOption.value);
+      notDuplicate = notDuplicate && !requestedCourses.some((course: RequestedCourse) => course.cid === customCourseOption.value);
     }
     const notEmpty = !(customCourseOption.value === "");
     toggleDisplayFeedback(true);

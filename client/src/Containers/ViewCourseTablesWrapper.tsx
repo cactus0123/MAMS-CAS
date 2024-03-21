@@ -2,7 +2,7 @@ import ViewCourseTable from "../Components/ViewCourseTable";
 
 import { Dispatch, SetStateAction, useContext } from "react";
 
-import { RequestedCoursesContext } from "../Contexts/RequestedCoursesContext";
+import { useStudentData } from "../Contexts/UserDataContext";
 
 type RequestedCourse = {
   studentid: string;
@@ -32,7 +32,7 @@ function createRows(data: RequestedCourse[]|null) {
 
 
 function ViewCourseTablesWrapper() {
-  const { requestedCourses, refreshRequestedCourses } = useContext(RequestedCoursesContext);
+  const { requestedCourses, refreshRequestedCourses } = useStudentData();
   
   return (
   <>

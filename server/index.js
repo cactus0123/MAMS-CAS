@@ -14,11 +14,11 @@ app.use(express.json()); //req.body
 //create
 app.post("/student", async (req, res) => {
   try {
-    const { first, last, yog } = req.body;
+    const { firstName, lastName, studentid, email, yearOfGraduation } = req.body;
     const newStudent = await pool.query(
-      "INSERT INTO students (first, last, yog) VALUES($1, $2, $3) RETURNING *",
-      [first, last, yog]
-    ); //(description) is column name, ($1) is var for [fName]
+      "INSERT INTO student_data (first_name, last_name, studentid, email, yog) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [firstName, lastName, studentid, email, yearOfGraduation]
+    ); //(description) is column name, ($1) is var for [first_name]
 
     res.json(newStudent.rows[0]);
   } catch (err) {
@@ -29,7 +29,7 @@ app.post("/student", async (req, res) => {
 //get all
 app.get("/student", async (req, res) => {
   try {
-    const allStudents = await pool.query("SELECT * FROM students");
+    const allStudents = await pool.query("SELECT * FROM student_data");
     res.json(allStudents.rows);
   } catch (err) {
     console.error(err.message);
@@ -41,9 +41,12 @@ app.get("/student/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const oneStudent = await pool.query(
-      "SELECT fName FROM students WHERE studentpk=($1)",
+      "SELECT * FROM student_data WHERE studentid=($1)",
       [id]
     );
+    if (oneStudent.rows.length === 0) {
+      res.json(null);
+    }
     res.json(oneStudent.rows[0]);
   } catch (err) {
     console.error(err.message);
@@ -54,12 +57,12 @@ app.get("/student/:id", async (req, res) => {
 app.put("/student/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { fName } = req.body;
+    const { firstName, lastName, email, yearOfGraduation } = req.body;
     const updateStu = await pool.query(
-      "UPDATE students SET fName = $1 WHERE studentpk = $2",
-      [fName, id]
+      "UPDATE student_data SET first_name = $1, last_name = $2, email = $3, yog = $4 WHERE studentid = $5 RETURNING *",
+      [firstName, lastName, email, yearOfGraduation, id]
     );
-    res.json("Student Updated");
+    res.json(updateStu.rows[0]);
   } catch (err) {
     console.error(err.message);
   }
@@ -71,7 +74,7 @@ app.delete("/student/:id", async (req, res) => {
     const { id } = req.params;
 
     const deleteStu = await pool.query(
-      "DELETE FROM students WHERE studentpk=$1",
+      "DELETE FROM student_data WHERE studentid=$1",
       [id]
     );
     res.json("Student Deleted");
@@ -80,15 +83,16 @@ app.delete("/student/:id", async (req, res) => {
   }
 });
 
-app.post("/submitted-courses", async (req, res) => {
+app.post("/submitted-courses/:id", async (req, res) => {
   
   try {
     const selectedCourses = req.body;
+    const { id } = req.params;
 
     for (const course of selectedCourses) {
       await pool.query(
         "INSERT INTO course_requests (cid, studentid, status, request_date) VALUES ($1, $2, $3, $4)",
-        [course.value, 3, false, getCurrentDate()]
+        [course.value, id, false, getCurrentDate()]
       );
     }
 
@@ -102,6 +106,19 @@ app.get("/submitted-courses", async (req, res) => {
   try {
     const allSubmittedCourses = await pool.query("SELECT * FROM course_requests");
     res.json(allSubmittedCourses.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+})
+
+app.get("/submitted-courses/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const studentSubmittedCourses = await pool.query(
+      "SELECT * FROM course_requests WHERE studentid=($1)",
+      [id]
+    );
+    res.json(studentSubmittedCourses.rows);
   } catch (err) {
     console.error(err.message);
   }
