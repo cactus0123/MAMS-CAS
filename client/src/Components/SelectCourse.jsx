@@ -6,7 +6,7 @@ import { Card } from 'react-bootstrap';
 import EnterCourseMenuWrapper from "../Containers/EnterCourseMenuWrapper.tsx";
 
 
-function SelectCourse({ value, options, onChange, onSubmitCustom }) {
+function SelectCourse({ value, options, onChange }) {
 
   return (
     <>
@@ -25,7 +25,7 @@ function SelectCourse({ value, options, onChange, onSubmitCustom }) {
           hideSelectedOptions={false}
         />
         
-        <EnterCourseMenuWrapper onSubmitCustom={onSubmitCustom}/>
+        <EnterCourseMenuWrapper />
       </Card.Body>
     </Card>
     </>

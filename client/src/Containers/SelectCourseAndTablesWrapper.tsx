@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useState, useContext } from "react";
 import { useStudentData } from "../Contexts/UserDataContext";
+import { useSelectedCourses } from "../Contexts/SelectedCoursesContext";
 
 import SelectCourseWrapper from "./SelectCourseWrapper";
 import SelectedCourseTables from "../Components/SelectedCourseTables";
@@ -16,9 +17,17 @@ interface Option {
 
 
 function SelectCourseAndTablesWrapper() {
-  const [selectedCourses, setSelectedCourses] = useState<Option[]>([]);
+  
+  const { selectedCourses, setSelectedCourses } = useSelectedCourses();
   const { studentData, refreshRequestedCourses } = useStudentData();
   
+  useEffect(() => {
+    const storedSelectedCourses = sessionStorage.getItem("selectedCourses");
+    if (storedSelectedCourses) {
+      setSelectedCourses(JSON.parse(storedSelectedCourses));
+    }
+  }, [])
+
   const selectedCoursesElems = selectedCourses.map((cid: Option) => {
     return (
       <tr key={cid.value}>
@@ -53,10 +62,7 @@ function SelectCourseAndTablesWrapper() {
 
   return (
     <>
-      <SelectCourseWrapper
-        selectedCourses={selectedCourses}
-        setSelectedCourses={setSelectedCourses}
-      />
+      <SelectCourseWrapper/>
       <Card className="preview-selected-card">
         <Card.Body>
           <Card.Title className="noto-sans">Courses Preview</Card.Title>

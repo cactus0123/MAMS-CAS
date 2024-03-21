@@ -27,12 +27,15 @@ export const UserDataArea = ({ children }) => {
   const { instance, accounts } = useMsal();
   const isAuthenticated = useIsAuthenticated();
 
+  
+
   // Function to update OAuth data
   // const updateOAuthData = (data) => {
   //   setOAuthData(data);
   // };
 
-  function RequestProfileData() {
+  async function RequestProfileData() {
+    await instance.initialize();
     if (isAuthenticated && accounts[0]) {
       instance
         .acquireTokenSilent({

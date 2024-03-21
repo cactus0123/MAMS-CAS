@@ -1,19 +1,24 @@
+import { useEffect } from "react";
 import SelectCourseAndTablesWrapper from "../Containers/SelectCourseAndTablesWrapper";
-import { FormValidatedArea } from "../Contexts/FormValidatedContext";
+import { FormArea } from "../Contexts/FormContext";
 
 import { useMsal, AuthenticatedTemplate, useIsAuthenticated } from '@azure/msal-react';
 
 import { useStudentData } from "../Contexts/UserDataContext";
+import { SelectedCoursesArea } from "../Contexts/SelectedCoursesContext";
 
 
 
 function SelectCoursePage() {
-  useStudentData();
+  
+
   return (
   <>
-    <FormValidatedArea initialDisplayFeedback={false}>
-      <SelectCourseAndTablesWrapper />
-    </FormValidatedArea>
+    <SelectedCoursesArea>
+      <FormArea initialDisplayFeedback={false} >
+        <SelectCourseAndTablesWrapper />
+      </FormArea>
+    </SelectedCoursesArea>
   </>
   )
 }

@@ -1,20 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useState, useContext } from "react";
 
 import SelectCourse from "../Components/SelectCourse";
-import { FormValidatedContext } from "../Contexts/FormValidatedContext";
+import { useFormValidation } from "../Contexts/FormContext";
 import { useStudentData } from "../Contexts/UserDataContext";
 
 import { Form } from "react-bootstrap";
 import { request } from "http";
+import { useSelectedCourses } from "../Contexts/SelectedCoursesContext";
 
 export type RequestedCourse = {
   studentid: string;
   cid: string;
 };
 
-interface Course {
+interface CourseJSONEntry {
   CID: string;
   TITLE: string;
 }
@@ -35,10 +36,10 @@ type courseSelecterSetter = (input: Option[] | prevFunc) => void;
 function getCourseOptions(requestedCourses: RequestedCourse[] | null): { value: string; label: string }[] {
   let input = require("../Components/Courses_v1.json");
   
-  let options = input.map((courses: Course) => {
+  let options = input.map((course: CourseJSONEntry) => {
     return {
-      value: courses.CID,
-      label: courses.CID,
+      value: course.CID,
+      label: course.CID,
     };
   });
   if (requestedCourses !== null) {
@@ -50,22 +51,18 @@ function getCourseOptions(requestedCourses: RequestedCourse[] | null): { value: 
   return options;
 }
 
-function SelectCourseWrapper({
-  selectedCourses,
-  setSelectedCourses,
-}: {
-  selectedCourses: Option[];
-  setSelectedCourses: courseSelecterSetter;
-}) {
+function SelectCourseWrapper() {
   //const [currentlySelected, setCurrentlySelected] = useState<string[]>();
-  const { setValidity, toggleDisplayFeedback, setFeedback } = useContext(FormValidatedContext);
+  const { selectedCourses, setSelectedCourses } = useSelectedCourses();
+  const { setValidity, toggleDisplayFeedback, setFeedback } = useFormValidation();
   const { requestedCourses } = useStudentData();
   
   const options = getCourseOptions(requestedCourses);
 
-  const changeHandler = (selectedOptions: Option[] | null) => {
-    if (selectedOptions != null) {
+  const changeHandler = (selectedOptions: Option[]) => {
+    if (selectedOptions) {
       setSelectedCourses(selectedOptions as Option[]);
+      sessionStorage.setItem("selectedCourses", JSON.stringify(selectedOptions));
     }
     // if (selectedOption != null) {
     //   console.log(selectedOption.value);
@@ -73,71 +70,12 @@ function SelectCourseWrapper({
     // }
   };
 
-  const submitHandlerCustom = (event: React.FormEvent<HTMLFormElement>) => {
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    const form = event.currentTarget;
-    const input = document.getElementById("custom-course-input");
-
-    const customCourseID = (
-      event.currentTarget.elements.namedItem("course") as HTMLInputElement
-    )?.value;
-
-    const customCourseOption: Option = {
-      value: customCourseID.toUpperCase(),
-      label: customCourseID.toUpperCase(),
-    };
-    let notDuplicate = !selectedCourses.some((course) => course.value === customCourseOption.value);
-    
-    if (requestedCourses !== null) {
-      notDuplicate = notDuplicate && !requestedCourses.some((course: RequestedCourse) => course.cid === customCourseOption.value);
-    }
-    const notEmpty = !(customCourseOption.value === "");
-    toggleDisplayFeedback(true);
-    if (notDuplicate && notEmpty) {
-      if (input !== null && input instanceof HTMLInputElement) {
-        input.setCustomValidity("");
-      } 
-      setValidity(true);
-      setSelectedCourses(
-        (prev: Option[]) => [...prev, customCourseOption] as Option[]
-      );
-      setFeedback(
-        <Form.Control.Feedback>
-          Course successfully added
-        </Form.Control.Feedback>
-      )
-      form.reset();
-    } else {
-      setValidity(false);
-      if (input !== null && input instanceof HTMLInputElement) {
-        input.setCustomValidity("test");
-      } 
-    }
-    if (!notDuplicate) {
-      setFeedback(
-        <Form.Control.Feedback type="invalid">
-          Course already added
-        </Form.Control.Feedback>
-      )
-    } else if (!notEmpty) {
-      setFeedback(
-        <Form.Control.Feedback type="invalid">
-          Cannot be blank
-        </Form.Control.Feedback>
-      )
-    }
-
-  };
 
   return (
     <SelectCourse
       value={selectedCourses}
       options={options}
       onChange={changeHandler}
-      onSubmitCustom={submitHandlerCustom}
     />
   );
 }
