@@ -43,6 +43,8 @@ const AuthHandler = () => {
   // const { instance, accounts } = useMsal();
   // const isAuthenticated = useIsAuthenticated();
   const navigate = useNavigate();
+
+  const isAuthenticated = useIsAuthenticated();
   
   // const studentData = useStudentData();
   // console.log(studentData);
@@ -97,9 +99,11 @@ const AuthHandler = () => {
   //   RequestAccessToken();
   // }, [isAuthenticated]);
   useEffect(() => {
-    navigate("/select");
+    if (isAuthenticated) {
+      navigate("/select");
+    }
     // checkStudentData();
-  });
+  }, [isAuthenticated]);
   
   return <div>Processing authentication response...</div>;
 };

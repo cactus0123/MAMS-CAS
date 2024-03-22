@@ -17,6 +17,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { StudentDataArea, UserDataArea } from "./Contexts/UserDataContext";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import AuthHandler from "./AuthHandler";
+import UnauthenticatedPage from "./Pages/UnauthenticatedPage";
 
 // import Column from "antd/es/table/Column";
 
@@ -35,6 +36,7 @@ function App() {
                 <Route index element={<Navigate to="/select" />} />
                 <Route path="select" element={<SelectCoursePage />} />
                 <Route path="view" element={<ViewCoursePage />} />
+                <Route path="unauthenticated" element={<UnauthenticatedPage />} />
               </Route>
             </Routes>
           </BrowserRouter>

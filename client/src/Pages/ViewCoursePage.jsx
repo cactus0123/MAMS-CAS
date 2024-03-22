@@ -2,13 +2,21 @@ import SelectCourseAndTablesWrapper from "../Containers/SelectCourseAndTablesWra
 import ViewCourseTablesWrapper from "../Containers/ViewCourseTablesWrapper";
 
 import { useContext } from "react";
+import { AuthenticatedTemplate, UnauthenticatedTemplate } from '@azure/msal-react';
+
+import { Navigate } from "react-router-dom";
 
 function ViewCoursePage() {
   return (
   <>
-    <div>
-      <ViewCourseTablesWrapper />
-    </div>
+    <AuthenticatedTemplate>
+      <div>
+        <ViewCourseTablesWrapper />
+      </div>
+    </AuthenticatedTemplate>
+    <UnauthenticatedTemplate>
+      <Navigate to="/unauthenticated"/>
+    </UnauthenticatedTemplate>
   </>
   )
 }

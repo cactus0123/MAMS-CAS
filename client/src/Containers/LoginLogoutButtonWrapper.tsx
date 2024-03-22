@@ -11,6 +11,10 @@ function LoginLogoutButtonWrapper() {
   const navigate = useNavigate();
   const { instance, accounts } = useMsal();
   const [graphData, setGraphData] = useState(null);
+  const [modalActive, setModalActive] = useState(false);
+
+  const handleModalClose = () => setModalActive(false);
+  const handleModalShow = () => setModalActive(true);
 
   const isAuthenticated = useIsAuthenticated();
 
@@ -26,12 +30,13 @@ function LoginLogoutButtonWrapper() {
         postLogoutRedirectUri: "/select",
         mainWindowRedirectUri: "/select"
     });
+    // instance.logout();
 }
 
 
   return (
   <>
-    {isAuthenticated ? <LogoutButton handleLogout={handleLogout}/> : <LoginButton handleLogin={handleLogin} />}
+    {isAuthenticated ? <LogoutButton show={modalActive} handleModalShow={handleModalShow} handleModalClose={handleModalClose} handleLogout={handleLogout}/> : <LoginButton handleLogin={handleLogin} />}
   </>
   )
 }
