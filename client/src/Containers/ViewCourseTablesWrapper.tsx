@@ -32,7 +32,7 @@ function createRows(data: RequestedCourse[]|null) {
 
 
 function ViewCourseTablesWrapper() {
-  const { requestedCourses, refreshRequestedCourses } = useStudentData();
+  const { requestedCourses } = useStudentData();
   
   return (
   <>

@@ -36,7 +36,13 @@ function LoginLogoutButtonWrapper() {
 
   return (
   <>
-    {isAuthenticated ? <LogoutButton show={modalActive} handleModalShow={handleModalShow} handleModalClose={handleModalClose} handleLogout={handleLogout}/> : <LoginButton handleLogin={handleLogin} />}
+    <AuthenticatedTemplate>
+      <LogoutButton show={modalActive} handleModalShow={handleModalShow} handleModalClose={handleModalClose} handleLogout={handleLogout}/>
+    </AuthenticatedTemplate>
+
+    <UnauthenticatedTemplate>
+      <LoginButton handleLogin={handleLogin} />
+    </UnauthenticatedTemplate>
   </>
   )
 }

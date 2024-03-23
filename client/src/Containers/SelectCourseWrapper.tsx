@@ -25,9 +25,6 @@ interface Option {
   label: string;
 }
 
-type prevFunc = (input: any) => Option[];
-type courseSelecterSetter = (input: Option[] | prevFunc) => void;
-
 /**
  * Gets data from courses in Courses_v1.json
  *
@@ -52,9 +49,7 @@ function getCourseOptions(requestedCourses: RequestedCourse[] | null): { value: 
 }
 
 function SelectCourseWrapper() {
-  //const [currentlySelected, setCurrentlySelected] = useState<string[]>();
   const { selectedCourses, setSelectedCourses } = useSelectedCourses();
-  const { setValidity, toggleDisplayFeedback, setFeedback } = useFormValidation();
   const { requestedCourses } = useStudentData();
   
   const options = getCourseOptions(requestedCourses);
@@ -64,10 +59,6 @@ function SelectCourseWrapper() {
       setSelectedCourses(selectedOptions as Option[]);
       sessionStorage.setItem("selectedCourses", JSON.stringify(selectedOptions));
     }
-    // if (selectedOption != null) {
-    //   console.log(selectedOption.value);
-    //   setSelectedCourses([...selectedCourses, selectedOption.value]);
-    // }
   };
 
 
